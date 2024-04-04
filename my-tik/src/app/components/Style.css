@@ -1,0 +1,21 @@
+/* تعريف متغيرات CSS لألوان الخلفية */
+:root {
+    --bg-color-red: #ff0000;
+    --bg-color-yellow: #ffff00;
+  }
+  
+  /* تحديد تأثير تغيير لون الخلفية */
+  @keyframes changeBackground {
+    0% {
+      background-color: var(--bg-color-red);
+    }
+    100% {
+      background-color: var(--bg-color-yellow);
+    }  
+  }
+  
+  /* تطبيق الأنماشن على العنصر المستهدف */
+  .animated-background {
+    animation: changeBackground 20s infinite; /* تغيير الخلفية كل 3 ثواني بشكل متكرر */
+  }
+  

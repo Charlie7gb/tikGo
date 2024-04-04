@@ -29,11 +29,7 @@ io.on('connection', (socket) => {
         socket.emit("respons",{message:"hello I'am Server"})
     });
 
-
-
-
     console.info('New connection from origin', socket.handshake.headers['origin'] || socket.handshake.headers['referer']);
-
     
     socket.on('setUniqueId', (uniqueId, options) => {
 
