@@ -5,21 +5,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Draggable from 'react-draggable';
 import './Style.css';
 
-
 import { subscribeToLike, subscribeToChat, subscribeToGift } from '../socketconnection';
-
-
-
 
 export default function SoketHand() {
 
-    const [usernmae, setusernmae] = useState('');
     const [like, setlike] = useState([]);
     const [gift, setgift] = useState([]);
     const [biggift, setbiggift] = useState([]);
     const [comment, setcomment] = useState([]);
    
-
     useEffect(() => {
 
         subscribeToLike((data) => {
@@ -142,10 +136,3 @@ export default function SoketHand() {
         </div>
     )
 }
-
-
-/*
-"comment":"Ff",
-"nickname":"Calledtrader",
-"profilePictureUrl":"https://p16-pu-sign-useast8.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/6ffc9a4c534d80d978f544eeb8714db6~c5_100x100.webp?lk3s=a5d48078&x-expires=1712570400&x-signature=Th4TZQFw6WRyAC6IkQ77gOtaUzA%3D",
-*/
