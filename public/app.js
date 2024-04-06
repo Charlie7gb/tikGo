@@ -77,7 +77,8 @@ function isPendingStreak(data) {
 function addChatItem(color, data, text, summarize) {
     let container = location.href.includes('obs.html') ? $('.eventcontainer') : $('.chatcontainer');
 
-    if (container.find('div').length > 500) {
+    if (container.find('div').length > 500) 
+	{
         container.find('div').slice(0, 200).remove();
     }
 

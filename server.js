@@ -33,6 +33,7 @@ io.on('connection', (socket) => {
     
     socket.on('setUniqueId', (uniqueId, options) => {
 
+		console.log(options);
         // Prohibit the client from specifying these options (for security reasons)
         if (typeof options === 'object' && options) {
             delete options.requestOptions;
@@ -65,27 +66,17 @@ io.on('connection', (socket) => {
         // Redirect wrapper control events once
         tiktokConnectionWrapper.once('connected', state => socket.emit('tiktokConnected', state));
         tiktokConnectionWrapper.once('disconnected', reason => socket.emit('tiktokDisconnected', reason));
-
         // Notify client when stream ends
         tiktokConnectionWrapper.connection.on('streamEnd', () => socket.emit('streamEnd'));
-
         // Redirect message events
         tiktokConnectionWrapper.connection.on('roomUser', msg => socket.emit('roomUser', msg));
-        //tiktokConnectionWrapper.connection.on('member', msg => socket.emit('member',   msg));
-        tiktokConnectionWrapper.connection.on('chat',     (msg) => {
-            socket.emit('chat',     msg);
-            //console.log(msg.nickname+" - "+msg.comment); 
-        });
-        tiktokConnectionWrapper.connection.on('gift',     msg => socket.emit('gift',     msg));
-        tiktokConnectionWrapper.connection.on('social',   msg => socket.emit('social',   msg));
-        tiktokConnectionWrapper.connection.on('like',     msg => socket.emit('like',     msg));
-        //tiktokConnectionWrapper.connection.on('questionNew', msg => socket.emit('questionNew', msg));
-        //tiktokConnectionWrapper.connection.on('linkMicBattle', msg => socket.emit('linkMicBattle', msg));
-        //tiktokConnectionWrapper.connection.on('linkMicArmies', msg => socket.emit('linkMicArmies', msg));
-        //tiktokConnectionWrapper.connection.on('liveIntro', msg => socket.emit('liveIntro', msg));
-        //tiktokConnectionWrapper.connection.on('emote', msg => socket.emit('emote', msg));
-        //tiktokConnectionWrapper.connection.on('envelope', msg => socket.emit('envelope', msg));
-        //tiktokConnectionWrapper.connection.on('subscribe', msg => socket.emit('subscribe', msg));
+		
+		
+        tiktokConnectionWrapper.connection.on('chat',   msg => socket.emit('chat',msg));
+        tiktokConnectionWrapper.connection.on('gift',   msg => socket.emit('gift',msg));
+        //tiktokConnectionWrapper.connection.on('social', msg => socket.emit('social',msg));
+        tiktokConnectionWrapper.connection.on('like',   msg => socket.emit('like',msg));
+         
     });
 
     socket.on('disconnect', () => {
