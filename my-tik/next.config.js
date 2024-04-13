@@ -54,6 +54,7 @@ const nextConfig = {
 
             'platform-lookaside.fbsbx.com',
             'lh3.googleusercontent.com', 
+			'scontent-iad3-1.xx.fbcdn.net'
         ],
     }
 }

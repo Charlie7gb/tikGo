@@ -1,9 +1,12 @@
 'use client'
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Draggable from 'react-draggable';
 import './Style.css';
+
+import Giftfile from '../components/giftfile';
+import Commentfile from '../components/Commentfile';
 
 import { subscribeToLike, subscribeToChat, subscribeToGift } from '../socketconnection';
 
@@ -13,7 +16,8 @@ export default function SoketHand() {
     const [gift, setgift] = useState([]);
     const [biggift, setbiggift] = useState([]);
     const [comment, setcomment] = useState([]);
-   
+
+
     useEffect(() => {
 
         subscribeToLike((data) => {
@@ -40,6 +44,7 @@ export default function SoketHand() {
         //! ________________________________________________________________________________
 
         subscribeToChat((data) => { setcomment(data); });
+		
 
         //! ________________________________________________________________________________
 
@@ -66,72 +71,37 @@ export default function SoketHand() {
 
 
     return (
-        <div>
+        <div className="row w-100">
 
             {/*<input type="text" value={usernmae} onChange={handleChange} />*/}
             {/*<button type="submit" onClick={start()}>START</button>*/}
-
+<div className="col-md-4">
             <Draggable>
                 <div>
-                    <div className='animated-background p-1 rounded-3 text-center '> TOP 5 Like </div>
-                    <div className='container ' style={{ maxHeight: "485px", overflow: "hidden", width: "450px" }} >
+                    <div className='animated-background p-1 rounded-3 text-center '> TOP Like </div>
+                    <div className='container w-100' style={{ maxHeight: "470px", overflow: "hidden"}} >
                         {like.map((item, index) => (
                             <div key={index} className='row bg-light  mt-2 p-1  rounded-3 '>
                                 <div className='col-md-2 '>
                                     <Image src={item.profilePictureUrl} width="50" height="50" className='rounded-circle' alt='' />
                                 </div>
                                 <div className='col-md-10 '>
-                                    <p>{item.nickname} </p>
-                                    <p>
-                                        Like Count: {item.likeCount}
-                                    </p>
+                                    <p> {item.nickname} | Like Count: {item.likeCount} </p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </Draggable>
-
-            <Draggable>
-                <div>
-                    <div className='animated-background p-1 rounded-3 text-center '> Top 7 Gift </div>
-                    <div className='container ' style={{ maxHeight: "470px", overflow: "auto", width: "450px" }} >
-                        {gift.map((item, index) => (
-                            <div key={index} className='row bg-light  mt-2 p-1  rounded-3 '>
-                                <div className='col-md-2 '>
-                                    <Image src={item.profilePictureUrl} width="50" height="50" className='rounded-circle' alt='' />
-                                </div>
-                                <div className='col-md-10'>
-                                    <p>
-                                        {item.nickname} |
-                                        <Image src={item.giftPictureUrl} width="20" height="20" className='rounded-circle' alt='' />
-                                        X {item.repeatCount}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </Draggable>
-
-            <Draggable>
-                <div>
-                    <div className='animated-background p-1 rounded-3 text-center '> Comment </div>
-                    <div className='container scroll-container' style={{ maxHeight: "220px", overflow: "auto", width: "450px" }} >
-
-                        <div className='row bg-light  mt-2 p-1  rounded-3 '>
-                            <div className='col-md-2 '>
-                                <Image src={comment.profilePictureUrl} width="50" height="50" className='rounded-circle' alt='' />
-                            </div>
-                            <div className='col-md-10'>
-                                <p>
-                                    {comment.nickname} | {comment.comment}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Draggable>
+</div>
+<div className="col-md-4">   
+          <div className="row">
+				<div className="col-md-12"><Giftfile content={gift} /></div>
+				<div className="col-md-12"><Commentfile content={comment} /></div>
+		  </div>
+</div>
+           
+     
 
         </div>
     )
